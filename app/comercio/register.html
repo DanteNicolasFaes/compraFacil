@@ -1,0 +1,36 @@
+<!-- comercio/register.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Comercio</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Registro de Comercio</h1>
+    </header>
+    <main>
+        <form id="registerForm">
+            <input type="text" class="registro" placeholder="Nombre del Comercio" required>
+            <input type="email" class="registro" placeholder="Correo Electrónico" required>
+            <input type="password" class="registro" placeholder="Contraseña" required>
+            <input type="text" class="registro" placeholder="Categoría del Comercio" required>
+            <input type="text" class="registro" placeholder="Dirección" required>
+            <input type="tel" class="registro" placeholder="Teléfono" required>
+            <input type="text" class="registro" placeholder="Horario de Atención" required>
+            <textarea class="registro" placeholder="Descripción del Comercio" required></textarea>
+            <input type="url" class="registro" placeholder="URL del Logo" >
+            <label>
+                <input type="checkbox" class="registro" id="mercadoPago"> MercadoPago
+            </label>
+            <button type="submit">Registrarse</button>
+        </form>
+    </main>
+    <footer>
+        <p>&copy; 2024 Carnicería XYZ</p>
+    </footer>
+    <script src="register.js"></script>
+</body>
+</html>

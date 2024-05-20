@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Callback de MercadoPago</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const authorizationCode = urlParams.get('code');
+            
+            if (authorizationCode) {
+                // Aquí deberías enviar el código de autorización al servidor para obtener el access token
+                fetch('/api/mercadopago/token', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ code: authorizationCode })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Cuenta de MercadoPago vinculada exitosamente');
+                    } else {
+                        alert('Error al vincular cuenta de MercadoPago');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            } else {
+                alert('No se recibió el código de autorización');
+            }
+        });
+    </script>
+</head>
+<body>
+    <h1>Procesando vinculación con MercadoPago...</h1>
+</body>
+</html>

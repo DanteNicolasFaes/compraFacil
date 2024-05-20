@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Comercio</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Panel de Comercio</h1>
+        <nav>
+            <button onclick="mostrarSeccion('productos')">Administrar Productos</button>
+            <button onclick="mostrarSeccion('precios')">Administrar Precios</button>
+            <button onclick="mostrarSeccion('ofertas')">Administrar Ofertas</button>
+            <button onclick="mostrarSeccion('pedidos')">Ver Pedidos</button>
+            <!-- Agregamos el botón "Productos en línea" -->
+            <button onclick="mostrarSeccion('productosEnLinea')">Productos en Línea</button>
+        </nav>
+    </header>
+    <main>
+        <!-- Sección de gestión de productos -->
+        <section id="productos" class="seccion">
+            <h2>Administrar Productos</h2>
+            <form id="productForm" enctype="multipart/form-data">
+                <input type="text" id="nombreProducto" placeholder="Nombre del Producto" required>
+                <input type="number" id="precioProducto" placeholder="Precio" required>
+                <textarea id="descripcionProducto" placeholder="Descripción"></textarea>
+                <input type="file" id="fotoProducto" accept="image/*" >
+                <button type="submit">Agregar Producto</button>
+            </form>
+            
+        </section>
+        <!-- Sección de gestión de precios -->
+        <section id="precios" class="seccion" style="display:none;">
+            <h2>Administrar Precios</h2>
+            <!-- Aquí puedes mostrar y administrar los precios -->
+            <div id="listaProductos">
+                <!-- Lista de productos será generada aquí -->
+            </div>
+        </section>
+        <!-- Sección de gestión de ofertas -->
+        <section id="ofertas" class="seccion" style="display:none;">
+            <h2>Administrar Ofertas</h2>
+            <form id="ofertaForm">
+                <label for="nombreProducto">Nombre del Producto:</label>
+                <input type="text" id="nombreProducto" placeholder="Nombre del Producto" required>
+                <label for="precioOferta">Precio de oferta:</label>
+                <input type="number" id="precioOferta" placeholder="Precio de oferta" required>
+                <button type="submit">Agregar Oferta</button>
+            </form>
+            <div id="listaOfertas">
+                <!-- Lista de ofertas será generada aquí -->
+            </div>
+        </section>
+        <!-- Sección de ver pedidos -->
+        <section id="pedidos" class="seccion" style="display:none;">
+            <h2>Ver Pedidos</h2>
+            <div id="listaPedidos">
+                <!-- Lista de pedidos será generada aquí -->
+            </div>
+        </section>
+        <!-- Sección de productos en línea -->
+        <section id="productosEnLinea" class="seccion" style="display:none;">
+            <h2>Productos en Línea</h2>
+            <!-- Aquí se mostrarán los productos en línea -->
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Carnicería XYZ</p>
+    </footer>
+    <script src="../comercio/comercio.js"></script>
+</body>
+</html>
