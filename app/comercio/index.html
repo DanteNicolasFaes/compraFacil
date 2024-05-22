@@ -40,16 +40,14 @@
         </section>
         <section id="ofertas" class="seccion" style="display:none;">
             <h2>Administrar Ofertas</h2>
-            <form id="ofertaForm">
-                <label for="nombreProductoOferta">Nombre del Producto:</label>
-                <input type="text" id="nombreProductoOferta" placeholder="Nombre del Producto" required>
-                <label for="precioOferta">Precio de oferta:</label>
-                <input type="number" id="precioOferta" placeholder="Precio de oferta" required>
-                <label for="descripcionOferta">Descripción de la Oferta:</label>
-                <textarea id="descripcionOferta" placeholder="Descripción de la Oferta"></textarea>
-                <label for="stockOferta">Stock Disponible</label>
-                <input type="number" id="stockOferta" placeholder="Stock Disponible" required>
-                <button type="submit">Agregar Oferta</button>
+            <form id="offerForm">
+                <input type="text" id="offerName" placeholder="Nombre de la oferta">
+                <input type="number" id="offerPrice" placeholder="Precio">
+                <textarea id="offerDescription" placeholder="Descripción de la oferta"></textarea>
+                <input type="file" id="offerImage">
+                <button type="button" onclick="saveOffer()">Guardar</button>
+            </form>
+            
             </form>
             <div id="listaOfertas"></div>
         </section>

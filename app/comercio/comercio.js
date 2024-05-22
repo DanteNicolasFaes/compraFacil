@@ -198,5 +198,29 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById(seccion).style.display = 'block';
     };
 });
+function saveOffer() {
+    const offerName = document.getElementById('offerName').value;
+    const offerDescription = document.getElementById('offerDescription').value;
+    const offerPrice = document.getElementById('offerPrice').value;
+    const offerImage = document.getElementById('offerImage').files[0];
+
+    const formData = new FormData();
+    formData.append('name', offerName);
+    formData.append('description', offerDescription);
+    formData.append('price', offerPrice);
+    formData.append('image', offerImage);
+
+    fetch('/api/saveOffer', {
+        method: 'POST',
+        body: formData
+    }).then(response => response.json())
+      .then(data => {
+          if (data.success) {
+              window.location.href = '/productsOnline';
+          } else {
+              alert('Error al guardar la oferta');
+          }
+      });
+}
 
 
