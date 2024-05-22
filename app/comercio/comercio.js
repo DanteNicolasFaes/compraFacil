@@ -77,7 +77,8 @@ document.addEventListener('DOMContentLoaded', function() {
             const nombre = document.getElementById('nombreProducto').value;
             const precio = document.getElementById('precioProducto').value;
             const descripcion = document.getElementById('descripcionProducto').value;
-            const stock = document.getElementById('stockProducto').value; // Nuevo campo para el stock
+            const stock = document.getElementById('stockProducto').value;
+            const foto = document.getElementById('fotoProducto').files[0]; // Obtener la imagen
 
             // Crear el elemento de producto solo en la lista de precios
             const precioItem = document.createElement('div');
@@ -86,6 +87,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <p>Precio: <input type="number" value="${precio}" onchange="modificarPrecio(this, '${nombre}')"></p>
                 <p>Descripción: <textarea onchange="modificarDescripcion(this, '${nombre}')">${descripcion}</textarea></p>
                 <p>Stock: ${stock}</p>
+                <img src="${URL.createObjectURL(foto)}"> <!-- Mostrar la imagen -->
             `;
             listaPrecios.appendChild(precioItem);
 
@@ -96,6 +98,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <p>Precio: $${precio}</p>
                 <p>${descripcion}</p>
                 <p>Stock: ${stock}</p>
+                <img src="${URL.createObjectURL(foto)}"> <!-- Mostrar la imagen -->
                 <button onclick="eliminarProductoEnLinea('${nombre}')">Eliminar</button>
             `;
             listaProductosEnLinea.appendChild(productItemEnLinea);
@@ -104,7 +107,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 nombre: nombre,
                 precio: precio,
                 descripcion: descripcion,
-                stock: stock
+                stock: stock,
+                fotoURL: URL.createObjectURL(foto) // Guardar la URL de la imagen en los datos del producto
             });
 
             mensajeExito.innerText = "Producto agregado con éxito.";
@@ -155,6 +159,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <p>Precio: $${producto.precio}</p>
                 <p>${producto.descripcion}</p>
                 <p>Stock: ${producto.stock}</p>
+                <img src="${producto.fotoURL}"> <!-- Mostrar la imagen -->
                 <button onclick="eliminarProductoEnLinea('${producto.nombre}')">Eliminar</button>
             `;
             listaProductosEnLinea.appendChild(productItemEnLinea);
@@ -179,7 +184,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const nombre = div.querySelector('h3').innerText;
             const nuevoPrecio = div.querySelector('p:nth-child(2) input').value;
             const nuevaDescripcion = div.querySelector('p:nth-child(3) textarea').value;
-            const nuevoStock = div.querySelector('p:nth-child(4)').innerText; // Nuevo campo para el stock
+            const nuevoStock = div.querySelector('p:nth-child(4)').innerText;
 
             // Crear el elemento de producto en la lista de productos en línea
             const productItemEnLinea = document.createElement('div');
@@ -188,6 +193,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <p>Precio: $${nuevoPrecio}</p>
                 <p>${nuevaDescripcion}</p>
                 <p>Stock: ${nuevoStock}</p>
+                <img src="${productosEnLinea.find(producto => producto.nombre === nombre).fotoURL}"> <!-- Mostrar la imagen -->
                 <button onclick="eliminarProductoEnLinea('${nombre}')">Eliminar</button>
             `;
             listaProductosEnLinea.appendChild(productItemEnLinea);
@@ -196,7 +202,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (producto.nombre === nombre) {
                     producto.precio = nuevoPrecio;
                     producto.descripcion = nuevaDescripcion;
-                    producto.stock = nuevoStock; // Actualizar el stock
+                    producto.stock = nuevoStock;
                 }
             });
         });
@@ -221,4 +227,3 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById(seccion).style.display = 'block';
     };
 });
-
