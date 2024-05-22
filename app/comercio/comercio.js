@@ -85,8 +85,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <h3>${nombre}</h3>
                 <p>Precio: <input type="number" value="${precio}" onchange="modificarPrecio(this, '${nombre}')"></p>
                 <p>Descripción: <textarea onchange="modificarDescripcion(this, '${nombre}')">${descripcion}</textarea></p>
-                <p>Stock: ${stock}</p> <!-- Agregar el stock -->
-                <button onclick="eliminarProducto(this)">Eliminar</button>
+                <p>Stock: ${stock}</p>
             `;
             listaPrecios.appendChild(precioItem);
 
@@ -96,7 +95,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 <h3>${nombre}</h3>
                 <p>Precio: $${precio}</p>
                 <p>${descripcion}</p>
-                <p>Stock: ${stock}</p> <!-- Agregar el stock -->
+                <p>Stock: ${stock}</p>
+                <button onclick="eliminarProductoEnLinea('${nombre}')">Eliminar</button>
             `;
             listaProductosEnLinea.appendChild(productItemEnLinea);
 
@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 nombre: nombre,
                 precio: precio,
                 descripcion: descripcion,
-                stock: stock // Agregar el stock
+                stock: stock
             });
 
             mensajeExito.innerText = "Producto agregado con éxito.";
@@ -142,6 +142,25 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     };
 
+    window.eliminarProductoEnLinea = function(nombre) {
+        // Eliminar el producto de la lista de productos en línea
+        productosEnLinea = productosEnLinea.filter(producto => producto.nombre !== nombre);
+
+        // Actualizar la visualización de la lista de productos en línea
+        listaProductosEnLinea.innerHTML = '';
+        productosEnLinea.forEach(producto => {
+            const productItemEnLinea = document.createElement('div');
+            productItemEnLinea.innerHTML = `
+                <h3>${producto.nombre}</h3>
+                <p>Precio: $${producto.precio}</p>
+                <p>${producto.descripcion}</p>
+                <p>Stock: ${producto.stock}</p>
+                <button onclick="eliminarProductoEnLinea('${producto.nombre}')">Eliminar</button>
+            `;
+            listaProductosEnLinea.appendChild(productItemEnLinea);
+        });
+    };
+
     window.modificarPrecio = function(input, nombre) {
         cambiosPendientes = true;
     };
@@ -160,6 +179,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const nombre = div.querySelector('h3').innerText;
             const nuevoPrecio = div.querySelector('p:nth-child(2) input').value;
             const nuevaDescripcion = div.querySelector('p:nth-child(3) textarea').value;
+            const nuevoStock = div.querySelector('p:nth-child(4)').innerText; // Nuevo campo para el stock
 
             // Crear el elemento de producto en la lista de productos en línea
             const productItemEnLinea = document.createElement('div');
@@ -167,6 +187,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 <h3>${nombre}</h3>
                 <p>Precio: $${nuevoPrecio}</p>
                 <p>${nuevaDescripcion}</p>
+                <p>Stock: ${nuevoStock}</p>
+                <button onclick="eliminarProductoEnLinea('${nombre}')">Eliminar</button>
             `;
             listaProductosEnLinea.appendChild(productItemEnLinea);
 
@@ -174,6 +196,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (producto.nombre === nombre) {
                     producto.precio = nuevoPrecio;
                     producto.descripcion = nuevaDescripcion;
+                    producto.stock = nuevoStock; // Actualizar el stock
                 }
             });
         });
@@ -198,29 +221,4 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById(seccion).style.display = 'block';
     };
 });
-function saveOffer() {
-    const offerName = document.getElementById('offerName').value;
-    const offerDescription = document.getElementById('offerDescription').value;
-    const offerPrice = document.getElementById('offerPrice').value;
-    const offerImage = document.getElementById('offerImage').files[0];
-
-    const formData = new FormData();
-    formData.append('name', offerName);
-    formData.append('description', offerDescription);
-    formData.append('price', offerPrice);
-    formData.append('image', offerImage);
-
-    fetch('/api/saveOffer', {
-        method: 'POST',
-        body: formData
-    }).then(response => response.json())
-      .then(data => {
-          if (data.success) {
-              window.location.href = '/productsOnline';
-          } else {
-              alert('Error al guardar la oferta');
-          }
-      });
-}
-
 
