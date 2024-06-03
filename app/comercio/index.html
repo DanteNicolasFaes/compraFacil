@@ -19,7 +19,7 @@
     </header>
     <main>
         <div id="mensajeExito" style="display:none; color: green;">Producto agregado con éxito</div>
-        <section id="productos" class="seccion">
+        <section id="productos" class="seccion" style="display:none;">
             <h2>Administrar Productos</h2>
             <form id="productForm" enctype="multipart/form-data">
                 <input type="text" id="nombreProducto" placeholder="Nombre del Producto" required>
@@ -34,21 +34,19 @@
         
         <section id="precios" class="seccion" style="display:none;">
             <h2>Administrar Precios</h2>
-         
+          
             <div id="listaPrecios"></div>
             <button onclick="guardarCambios()">Guardar Cambios</button>
         </section>
         <section id="ofertas" class="seccion" style="display:none;">
             <h2>Administrar Ofertas</h2>
-            <form id="offerForm">
-                <input type="text" id="offerName" placeholder="Nombre de la oferta">
-                <input type="number" id="offerPrice" placeholder="Precio">
-                <textarea id="offerDescription" placeholder="Descripción de la oferta"></textarea>
-                <input type="file" id="offerImage" accept="image/*">
+            <form id="offerForm" enctype="multipart/form-data">
+                <input type="text" id="nombreOferta" placeholder="Nombre de la oferta" required>
+                <input type="number" id="precioOferta" placeholder="Precio" required>
+                <input type="number" id="stockOferta" placeholder="Stock Disponible" required> 
+                <textarea id="descripcionOferta" placeholder="Descripción de la oferta" required></textarea>
+                <input type="file" id="fotoOferta" accept="image/*">
                 <button type="submit" onclick="guardarOferta()">Guardar</button>
-            </form>
-            
-            
             </form>
             
         </section>
@@ -61,8 +59,12 @@
         <section id="productosEnLinea" class="seccion" style="display:none;">
             <h2>Productos en Línea</h2>
             <div id="listaProductosEnLinea"></div>
+            <h2>Ofertas</h2>
             <div id="listaOfertas"></div>
+            <h2>Precios</h2>
+            <div id="listaPrecios"></div>
         </section>
+        
     </main>
     <footer>
         <p>&copy; 2024 Carnicería XYZ</p>
